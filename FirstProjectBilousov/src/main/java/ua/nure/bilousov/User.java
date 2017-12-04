@@ -1,5 +1,6 @@
 package ua.nure.bilousov;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class User {
@@ -7,36 +8,75 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private Date birthday;
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 	public Date getBirthday() {
 		return birthday;
 	}
+
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
-	
+
+	public int getAge() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		int currentYear = calendar.get(Calendar.YEAR);
+		int currentMonth = calendar.get(Calendar.MONTH);
+		int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
+		calendar.setTime(getBirthday());
+	    int year = calendar.get(Calendar.YEAR);
+	    int month = calendar.get(Calendar.MONTH);
+	    int day = calendar.get(Calendar.DAY_OF_MONTH);
+	    int a = currentYear - year;
+	    if (month == currentMonth) {
+	      if(day == currentDay){
+	        a=a+1;
+	      return a;
+	      }
+	      
+	      else {
+	    	  return a;
+	      }
+	      
+	    	
+	    }
+	    
+	    else {
+	    	return a;
+	    }
+	    
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", birthday=" + birthday
 				+ "]";
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -47,6 +87,7 @@ public class User {
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -78,10 +119,10 @@ public class User {
 			return false;
 		return true;
 	}
+
 	public String getFullName() {
-		return new StringBuilder().append(firstName).append(" ").append(lastName).toString();	
-	
+		return new StringBuilder().append(firstName).append(" ").append(lastName).toString();
+
 	}
-	
-	
+
 }

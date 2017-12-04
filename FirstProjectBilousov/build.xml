@@ -7,7 +7,7 @@
 		<delete dir = "${build-dir}"/>
     </target>
 		
-	<target name = "init">
+	<target name = "init" depends="clean">
 		<mkdir dir="${build-dir}"/>
 	</target>
 	
@@ -21,6 +21,10 @@
 	
 	<target name = "test" depends = "test-compile">
 		<junit>
+			<classpath>
+				<pathelement location ="$(build-dir)"/>
+		    </classpath>
+			<formatter type = "plain"/>
 			<test name = "ua.nure.bilousov.UserTest"> </test>
 		</junit>
     </target>
