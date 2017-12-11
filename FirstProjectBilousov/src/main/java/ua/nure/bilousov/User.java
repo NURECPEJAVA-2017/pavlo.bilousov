@@ -52,22 +52,20 @@ public class User {
 	    int month = calendar.get(Calendar.MONTH);
 	    int day = calendar.get(Calendar.DAY_OF_MONTH);
 	    int a = currentYear - year;
-	    if (month == currentMonth||month > currentMonth) {
-	      if(day > currentDay||day == currentDay){
-	        a=a+1;
+	    if (currentMonth > month) {
 	      return a;
 	      }
 	      
-	      else {
+	      else if (month == currentMonth){
+	    	 if (currentDay > day||day == currentDay) {
 	    	  return a;
-	      }
-	      
-	    	
-	    }
+	    	 }
+	      else 
+	    	  return a-1; }
 	    
-	    else {
-	    	return a;
-	    }
+	      else 
+	    	  return a-1;
+	    	
 	    
 	}
 
@@ -126,3 +124,4 @@ public class User {
 	}
 
 }
+
