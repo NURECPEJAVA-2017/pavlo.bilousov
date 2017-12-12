@@ -16,8 +16,11 @@ import ua.nure.bilousov.User;
  //Test update
 //Test delete 
 public class HsqldbUserDaoTest extends DatabaseTestCase {
+	private static final String FIRST_NAME = "John";
+	private static final String LAST_NAME = "Doe";
 	private HsqldbUserDao dao;
 	private ConnectionFactory connectionFactory;
+	
 	
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -29,12 +32,19 @@ public class HsqldbUserDaoTest extends DatabaseTestCase {
 	@Test
     public void testCreate() {
 	  User user = new User ();
-	  user.setFirstName("John");
-	  user.setLastName("Doe");
-	  user.setBirthday(new Date ());
+	  User resUser;
+	  Date dateOfBirth = new Date();
+	  user.setFirstName(FIRST_NAME);
+	  user.setLastName(LAST_NAME);
+	  user.setBirthday(dateOfBirth);
 	  assertNull(user.getId());
 	  try {
-		user = dao.create(user);
+		resUser = dao.create(user);
+		assertNotNull(resUser);
+		assertNotNull(resUser.getId());
+		assertEquals(LAST_NAME, resUser.getFirstName());
+		assertEquals(dateOfBirth, resUser.getBirthday());
+		
 	} catch (DatabaseException e) {
 		fail(e.getMessage());
 		e.printStackTrace();
@@ -66,6 +76,7 @@ public class HsqldbUserDaoTest extends DatabaseTestCase {
 	protected IDataSet getDataSet() throws Exception {
 		IDataSet dataset = new XmlDataSet(getClass().getClassLoader().getResourceAsStream("usersDataSet.xml"));
 		return dataset;
+		
 	}
 
 }

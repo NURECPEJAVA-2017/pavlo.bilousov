@@ -9,6 +9,18 @@ public class User {
 	private String lastName;
 	private Date birthday;
 
+	public User(User user) {
+		this.id = user.getId();
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.birthday = user.getBirthday();
+		
+	}
+
+	public User() {
+		
+	}
+
 	public Long getId() {
 		return id;
 	}
